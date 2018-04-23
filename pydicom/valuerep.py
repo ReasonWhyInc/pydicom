@@ -533,10 +533,13 @@ class PersonName3(object):
 
         matchobj = re.match(matchstr, val)
 
-        self.__dict__.update(matchobj.groupdict())
+        if matchobj:
+            self.__dict__.update(matchobj.groupdict())
 
-        groups = matchobj.groups()
-        self.components = [groups[i] for i in (0, -2, -1)]
+            groups = matchobj.groups()
+            self.components = [groups[i] for i in (0, -2, -1)]
+        else:
+            self.components = [None, None, None]
 
     def __eq__(self, other):
         return self.original_string == other
